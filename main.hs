@@ -42,8 +42,8 @@ firstLaterIs c (x:_) = c == x
 
 firstNameBeginWith :: Char -> Person -> Bool
 firstNameBeginWith c p = 
-  firstLaterIs c firstname
-  where firstname = firstname p
+   firstLaterIs c firstname'
+  where firstname' = firstname p
 
 peopleThatBeginWithL :: [Person]
 peopleThatBeginWithL = filter (firstNameBeginWith 'L') people
@@ -52,11 +52,14 @@ peopleThatBeginWithL = filter (firstNameBeginWith 'L') people
 -- mapPeople f [] = []
 -- mapPeople f (x:xs) = f x : mapPeople f xs
 
-lastnames = [String]
+lastnames :: [String]
 lastnames = map lastname people
 
 sortedPeopleByFirstname :: [Person]
 sortedPeopleByFirstname = L.sortOn firstname people
+
+reverseSortedLastNames :: [String]
+reverseSortedLastNames = L.sortBy (\x y -> compare y x) lastnames
 
 yearsSinceBirthAtYear :: Year -> Person -> Int
 yearsSinceBirthAtYear y p = y - yearOfBirth p
@@ -64,7 +67,7 @@ yearsSinceBirthAtYear y p = y - yearOfBirth p
 allYearsSinceBirthAt2001 :: [Int]
 allYearsSinceBirthAt2001 = map (yearsSinceBirthAtYear 2001) people
 
-earliestYearofBirth :: [Person] -> Year
+earliestYearOfBirth :: [Person] -> Year
 earliestYearOfBirth people = minimum $ L.map yearOfBirth people
 
 bornFirst :: [Person] -> Person
