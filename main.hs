@@ -3,12 +3,13 @@ import qualified Data.List as L
 -- record syntax
 type Name = String
 type Year = Int
-type Person = Person
+data Person = Person
   {
     firstname :: Name,
     lastname :: Name,
     yearOfBirth :: Year
-  } deriving (Show)
+  }
+  deriving(Show)
 
 -- constracting a Person
 blaise :: Person
